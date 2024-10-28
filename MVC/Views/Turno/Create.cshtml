@@ -1,10 +1,10 @@
-﻿@model MVC.Models.DTOs.Clientes.AltaClienteDTO
+﻿@model MVC.Models.DTOs.AltaTurnoViewModel
 
 @{
-    ViewData["Title"] = "Crear Usuario";
+    ViewData["Title"] = "Crear Turno";
 }
 
-<h2 class="mb-4">Crear Usuario</h2>
+<h2 class="mb-4">Crear Turno</h2>
 
 @if (TempData["msj"] != null)
 {
@@ -19,49 +19,33 @@
 <form asp-action="Create" method="post">
     <div class="form-row mb-3">
         <div class="col-md-6">
-            <label asp-for="Nombre" class="control-label font-weight-bold"></label>
-            <input asp-for="Nombre" class="form-control" />
-            <span asp-validation-for="Nombre" class="text-danger"></span>
+            <label asp-for="Fecha" class="control-label font-weight-bold"></label>
+            <input asp-for="Fecha" class="form-control" type="date" />
+            <span asp-validation-for="Fecha" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-row mb-3">
         <div class="col-md-6">
-            <label asp-for="Apellido" class="control-label font-weight-bold"></label>
-            <input asp-for="Apellido" class="form-control" />
-            <span asp-validation-for="Apellido" class="text-danger"></span>
+            <label asp-for="horarioSelec" class="control-label font-weight-bold">Horario</label>
+            <select asp-for="horarioSelec" asp-items="Model.ListaHorarios" class="form-control custom-select"></select> <!-- custom-select agrega la flecha -->
+            <span asp-validation-for="horarioSelec" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-row mb-3">
         <div class="col-md-6">
-            <label asp-for="Dni" class="control-label font-weight-bold"></label>
-            <input asp-for="Dni" class="form-control" type="text" />
-            <span asp-validation-for="Dni" class="text-danger"></span>
+            <label asp-for="clienteSeleccionado" class="control-label font-weight-bold">Cliente</label>
+            <select asp-for="clienteSeleccionado" asp-items="Model.Clientes" class="form-control custom-select"></select>
+            <span asp-validation-for="clienteSeleccionado" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-row mb-3">
         <div class="col-md-6">
-            <label asp-for="Calle" class="control-label font-weight-bold"></label>
-            <input asp-for="Calle" class="form-control" />
-            <span asp-validation-for="Calle" class="text-danger"></span>
-        </div>
-    </div>
-
-    <div class="form-row mb-3">
-        <div class="col-md-6">
-            <label asp-for="Altura" class="control-label font-weight-bold"></label>
-            <input asp-for="Altura" class="form-control" type="number" />
-            <span asp-validation-for="Altura" class="text-danger"></span>
-        </div>
-    </div>
-
-    <div class="form-row mb-3">
-        <div class="col-md-6">
-            <label asp-for="Telefono" class="control-label font-weight-bold"></label>
-            <input asp-for="Telefono" class="form-control" type="tel" />
-            <span asp-validation-for="Telefono" class="text-danger"></span>
+            <label asp-for="canchaSeleccionada" class="control-label font-weight-bold">Cancha</label>
+            <select asp-for="canchaSeleccionada" asp-items="Model.Canchas" class="form-control custom-select"></select>
+            <span asp-validation-for="canchaSeleccionada" class="text-danger"></span>
         </div>
     </div>
 
@@ -74,6 +58,8 @@
         </div>
     </div>
 </form>
+
+
 
 @section Scripts {
     @{
