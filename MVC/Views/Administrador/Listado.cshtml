@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<Administrador>
+@{
+    ViewData["Title"] = "Lista de Administradores";
+}
+
+<h1>Lista de Administradores</h1>
+
+
+<a asp-controller="Administrador" asp-action="Create" class="btn btn-primary">Crear Nuevo</a>
+
+<form asp-controller="Administrador" asp-action="Index" method="get">
+    <input type="text" name="dni" placeholder="Ingrese DNI del administrador"></input>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Calle</th>
+            <th>Altura</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var admin in Model)
+        {
+            <tr>
+                <td>@admin.Id</td>
+                <td>@admin.Nombre</td>
+                <td>@admin.Apellido</td>
+                <td>@admin.Dni</td>
+                <td>@admin.fechaNacimiento.ToString("dd/MM/yyyy")</td>
+                <td>@admin.Calle</td>
+                <td>@admin.Altura</td>
+
+
+                <td>
+                    <!-- Botón de actualizar -->
+                    <a href="@Url.Action("Editar", new {idAdmiMod = admin.Id })" class="btn btn-primary">Actualizar</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

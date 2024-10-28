@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MVC.Models.DTOs.ListaTurnoViewModel>
+@{
+    ViewData["Title"] = "Historial Turnos";
+}
+
+<h1>Historial</h1>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Horario</th>
+            <th>Cliente</th>
+            <th>Telefono Cliente</th>
+            <th>Cancha</th>
+            <th>Precio</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var turno in Model)
+            {
+                <tr>
+                    <td>@turno.Fecha.ToShortDateString()</td>
+                    <td>@turno.Horario</td>
+                    <td>@turno.Cliente</td>
+                    <td>@turno.TelefonoCliente</td>
+                    <td>@turno.Cancha</td>
+                    <td>$@turno.Precio.ToString()</td> <!-- Formatea como moneda -->
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No hay turnos para mostrar.</td>
+            </tr>
+        }
+    </tbody>
+</table>

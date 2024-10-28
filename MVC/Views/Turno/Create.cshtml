@@ -1,0 +1,82 @@
+﻿@model MVC.Models.DTOs.Clientes.AltaClienteDTO
+
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+<h2 class="mb-4">Crear Usuario</h2>
+
+@if (TempData["msj"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["msj"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<form asp-action="Create" method="post">
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Nombre" class="control-label font-weight-bold"></label>
+            <input asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Apellido" class="control-label font-weight-bold"></label>
+            <input asp-for="Apellido" class="form-control" />
+            <span asp-validation-for="Apellido" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Dni" class="control-label font-weight-bold"></label>
+            <input asp-for="Dni" class="form-control" type="text" />
+            <span asp-validation-for="Dni" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Calle" class="control-label font-weight-bold"></label>
+            <input asp-for="Calle" class="form-control" />
+            <span asp-validation-for="Calle" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Altura" class="control-label font-weight-bold"></label>
+            <input asp-for="Altura" class="form-control" type="number" />
+            <span asp-validation-for="Altura" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Telefono" class="control-label font-weight-bold"></label>
+            <input asp-for="Telefono" class="form-control" type="tel" />
+            <span asp-validation-for="Telefono" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mt-4">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+        </div>
+        <div class="col-md-6">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-block">Volver a la lista</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

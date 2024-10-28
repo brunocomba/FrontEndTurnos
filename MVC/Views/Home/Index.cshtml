@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MVC.Models.DTOs.ListaTurnoViewModel>
+@{
+    ViewData["Title"] = "Home";
+    var fechaHoy = DateTime.Now.ToShortDateString(); // Obtener la fecha actual
+}
+
+<h1>Turnos del Día - @fechaHoy</h1> <!-- Mostrar la fecha de hoy -->
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Horario</th>
+            <th>Cliente</th>
+            <th>Teléfono Cliente</th>
+            <th>Cancha</th>
+            <th>Precio</th>
+            <th>Acciones</th> <!-- Nueva columna para los botones de Editar y Eliminar -->
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var turno in Model)
+            {
+                <tr>
+                    <td>@turno.Fecha.ToShortDateString()</td>
+                    <td>@turno.Horario</td>
+                    <td>@turno.Cliente</td>
+                    <td>@turno.TelefonoCliente</td>
+                    <td>@turno.Cancha</td>
+                    <td>$@turno.Precio.ToString("N2")</td> <!-- Formatea el precio con dos decimales -->
+                    <td>
+                        <a asp-controller="Turno"  asp-action="Editar" asp-route-id="@turno.Id" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@turno.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">No hay turnos para mostrar.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<!-- Botón adicional para ir a otra vista, puede ser un enlace o botón -->
+<div class="text-right">
+    <a asp-controller="Turno" asp-action="Create" class="btn btn-primary">Agregar nuevo turno</a> <!-- Enlace a otra vista (ejemplo de creación de turno) -->
+</div>

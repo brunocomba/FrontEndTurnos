@@ -1,0 +1,125 @@
+﻿@model MVC.Models.DTOs.TurnoEditDTO
+
+@{
+    ViewData["Title"] = "Editar Turno";
+}
+
+<h2 class="mb-4">Editar Turno</h2>
+
+<!-- Mostrar mensaje de éxito si existe -->
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @ViewBag.SuccessMessage
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<!-- Mostrar mensaje de error si existe -->
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @ViewBag.ErrorMessage
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="row">
+    <!-- Formulario para mostrar datos del registro seleccionado -->
+    <div class="col-md-6">
+        <h4>Datos del Turno Seleccionado</h4>
+        <form>
+            <div class="form-group">
+                <label>Fecha</label>
+                <input type="text" class="form-control" value="@Model.FechaSeleccionada" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Horario</label>
+                <input type="text" class="form-control" value="@Model.Horario" readonly />
+            </div>
+           
+            <div class="form-group">
+                <label>Cliente</label>
+                <input type="text" class="form-control" value="@Model.ClienteSeleccionadoNombre" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Cancha</label>
+                <input type="text" class="form-control" value="@Model.CanchaSeleccionadaNombre" readonly />
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Formulario de Edición -->
+    <div class="col-md-6">
+        <h4>Formulario de Edición</h4>
+        <form asp-controller="Turno" asp-action="Editar" method="post">
+
+            <input type="hidden" asp-for="idTurnoMod" />
+
+            <div class="form-row mb-3">
+
+                <div class="col-md-6">
+                    <label asp-for="Fecha" class="control-label font-weight-bold"></label>
+                    <input asp-for="Fecha" class="form-control" type="date" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="form-row mb-3">
+
+                <div class="col-md-6">
+                    <label asp-for="HorarioSeleccionado" class="control-label font-weight-bold">Horario</label>
+                    <select asp-for="HorarioSeleccionado" asp-items="Model.Horarios" class="form-control custom-select"></select> <!-- custom-select agrega la flecha -->
+                    <span asp-validation-for="HorarioSeleccionado" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="form-row mb-3">
+
+                <div class="col-md-6">
+                    <label asp-for="ClienteSeleccionado" class="control-label font-weight-bold">Cliente</label>
+                    <select asp-for="ClienteSeleccionado" asp-items="Model.Clientes" class="form-control custom-select"></select>
+                    <span asp-validation-for="ClienteSeleccionado" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="form-row mb-3">
+
+                <div class="col-md-6">
+                    <label asp-for="CanchaSeleccionada" class="control-label font-weight-bold">Cancha</label>
+                    <select asp-for="CanchaSeleccionada" asp-items="Model.Canchas" class="form-control custom-select"></select>
+                    <span asp-validation-for="CanchaSeleccionada" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="form-row mt-4">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                </div>
+
+                <div class="col-md-6">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-block">Volver a la lista</a>
+                </div>
+
+            </div>
+
+        </form>
+        </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

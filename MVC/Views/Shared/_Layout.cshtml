@@ -1,0 +1,172 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - La Coca</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MVC.styles.css" asp-append-version="true" />
+
+    <!-- Bootstrap 4.5 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-pzjw8f+ua7Kw1TIqPQ2lYIw5zBWrAU9R7WBjzOZLr60Sxh93cS1Pp2u7msCQdBB" crossorigin="anonymous">
+    <style>
+        /* Estilos para la barra lateral (sidebar) */
+        .sidebar {
+            height: 100%; /* Altura completa */
+            width: 0; /* Inicia cerrada */
+            position: fixed; /* Posición fija */
+            top: 0;
+            left: 0;
+            background-color: #111; /* Color oscuro */
+            overflow-x: hidden; /* No se puede hacer scroll horizontal */
+            transition: 0.5s; /* Transición suave */
+            padding-top: 60px; /* Espacio superior */
+        }
+
+            .sidebar a {
+                padding: 10px 15px;
+                text-decoration: none;
+                font-size: 18px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidebar a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidebar .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+        #main {
+            transition: margin-left 0.5s;
+            padding: 16px;
+        }
+
+        /* Abre la barra lateral */
+        .openSidebar {
+            width: 250px;
+        }
+
+        /* Empuja el contenido a la derecha cuando la barra lateral está abierta */
+        .shiftContent {
+            margin-left: 250px;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Botón para abrir la barra lateral -->
+    <button class="btn btn-primary" onclick="openNav()">☰Menú</button>
+
+    <!-- Barra lateral -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+        <!-- Dropdown para Clientes -->
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="clientesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Clientes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="clientesDropdown">
+                <a class="dropdown-item" asp-area="" asp-controller="Cliente" asp-action="Listado">Listado de Clientes</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Cliente" asp-action="Create">Crear Cliente</a>
+                <!-- Agrega más opciones si es necesario -->
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="clientesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Turnbos
+            </a>
+            <div class="dropdown-menu" aria-labelledby="clientesDropdown">
+                <a class="dropdown-item" asp-area="" asp-controller="Turno" asp-action="Listado">Historial de Turnos</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Turno" asp-action="Create">Crear Turno</a>
+                <!-- Agrega más opciones si es necesario -->
+            </div>
+        </div>
+
+        <a asp-area="" asp-controller="Administrador" asp-action="Listado">Administradores</a>
+        <!-- Agrega más enlaces aquí -->
+    </div>
+
+    <!-- Contenido principal -->
+    <div id="main">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                       
+                        <ul class="navbar-nav flex-grow-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @ViewBag.Admin <!-- Muestra el nombre del administrador -->
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <!-- Formulario para cerrar sesión (petición POST) -->
+                                        <form action="@Url.Action("Logout", "Account")" method="post">
+                                            <button type="submit" class="dropdown-item">Cerrar Sesión</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+@*         poner una imagen!!
+ *@
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2024 - MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Bootstrap Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgEpFTO9zWfLwo5O6bBfbQ/2Ot8v32XkLp59yxkR8DHzTJF7iTO" crossorigin="anonymous"></script>
+
+    <!-- Script para manejar la apertura y cierre de la barra lateral -->
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").classList.add("openSidebar");
+            document.getElementById("main").classList.add("shiftContent");
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").classList.remove("openSidebar");
+            document.getElementById("main").classList.remove("shiftContent");
+        }
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

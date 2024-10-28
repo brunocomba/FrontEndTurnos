@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Cliente>
+@{
+    ViewData["Title"] = "Lista de Clientes";
+}
+
+<h1>Clientes registrados</h1>
+
+
+<form asp-action="Listado" method="get">
+    <div class="form-group">
+        <input type="text" id="dniCliente" name="dniCliente" class="form-control" placeholder="Ingrese DNI del cliente" />
+    </div>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Calle</th>
+            <th>Altura</th>
+            <th>Telefono</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.Nombre</td>
+                <td>@client.Apellido</td>
+                <td>@client.Dni</td>
+                <td>@client.fechaNacimiento.ToString("dd/MM/yyyy")</td>
+                <td>@client.Calle</td>
+                <td>@client.Altura</td>
+                <td>@client.Telefono</td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
