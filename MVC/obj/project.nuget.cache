@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dZ58khFkUufXSir6EjXgOKIBSefPSj2tHMPzcrrl98tMm691g5fwTuWGsdpnyZW6ZsZKpcQWzev0ErYrsCvYnQ==",
+  "dgSpecHash": "4pZ7w5LJZ9m1fG19S3FTxPTC+C9Eqy+yw1QMC/XV+BQ6cOkMmnBNw1AexSYZMS7C9L1uVVj/HOgn7MSYkOdZog==",
   "success": true,
-  "projectFilePath": "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\Front_Turnos\\MVC\\MVC.csproj",
+  "projectFilePath": "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\FrontEndTurnos\\MVC\\MVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\brcom\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\brcom\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

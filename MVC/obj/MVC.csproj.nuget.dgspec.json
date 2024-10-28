@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\Front_Turnos\\MVC\\MVC.csproj": {}
+    "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\FrontEndTurnos\\MVC\\MVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\Front_Turnos\\MVC\\MVC.csproj": {
+    "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\FrontEndTurnos\\MVC\\MVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\Front_Turnos\\MVC\\MVC.csproj",
+        "projectUniqueName": "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\FrontEndTurnos\\MVC\\MVC.csproj",
         "projectName": "MVC",
-        "projectPath": "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\Front_Turnos\\MVC\\MVC.csproj",
+        "projectPath": "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\FrontEndTurnos\\MVC\\MVC.csproj",
         "packagesPath": "C:\\Users\\brcom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\Front_Turnos\\MVC\\obj\\",
+        "outputPath": "C:\\Users\\brcom\\OneDrive\\Documentos\\GitHub\\FrontEndTurnos\\MVC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brcom\\AppData\\Roaming\\NuGet\\NuGet.Config",
