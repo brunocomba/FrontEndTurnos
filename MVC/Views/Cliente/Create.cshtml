@@ -41,6 +41,14 @@
         </div>
     </div>
 
+    <div class="form-group mb-3">
+        <div class="col-md-6">
+            <label asp-for="fechaNacimiento" class="control-label font-weight-bold"></label>
+            <input asp-for="fechaNacimiento" class="form-control" type="date" />
+            <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
+        </div>
+    </div>
+
     <div class="form-row mb-3">
         <div class="col-md-6">
             <label asp-for="Calle" class="control-label font-weight-bold"></label>
@@ -70,7 +78,7 @@
             <button type="submit" class="btn btn-primary btn-block">Guardar</button>
         </div>
         <div class="col-md-6">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-block">Volver a la lista</a>
+            <a asp-controller="Cliente" asp-action="Listado" class="btn btn-secondary btn-block">Ver listado</a>
         </div>
     </div>
 </form>
@@ -79,4 +87,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}}
+}

@@ -1,13 +1,9 @@
-﻿using Humanizer;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MVC.ApiService;
 using MVC.Models;
 using MVC.Models.DTOs;
 using MVC.Services;
-using Newtonsoft.Json;
-using System.Runtime.Intrinsics.Arm;
 using System.Text;
 
 namespace MVC.Controllers
@@ -77,7 +73,7 @@ namespace MVC.Controllers
             var adminName = HttpContext.Session.GetString("AdminName");
             ViewBag.Admin = adminName;
             // Crear el DTO directamente
-            TurnoDTO dto = new TurnoDTO
+            AltaTurnoDTO dto = new AltaTurnoDTO
             {
                 idCliente = viewModel.clienteSeleccionado,
                 idCancha = viewModel.canchaSeleccionada,
@@ -122,7 +118,7 @@ namespace MVC.Controllers
         }
 
         // Método para cargar los datos del formulario en caso de fallo
-        private async Task CargarDatosParaFormulario(int idTurnoMod, TurnoEditDTO viewModel)
+        private async Task CargarDatosParaFormulario(int idTurnoMod, TurnoEditViewModel viewModel)
         {
             var adminName = HttpContext.Session.GetString("AdminName");
             ViewBag.Admin = adminName;
@@ -165,10 +161,6 @@ namespace MVC.Controllers
                 Text = h,
 
             }).ToList();
-
-
-
-
         }
 
         //private async Task<IEnumerable<TurnoEditDTO>> cargaViewModel(int id)
@@ -249,7 +241,7 @@ namespace MVC.Controllers
             var horarios = hr.ObtenerLista();
 
             // Carga los datos para los combos
-            var viewModel = new TurnoEditDTO
+            var viewModel = new TurnoEditViewModel
             {
                 idTurnoMod = turno.Id,
                 CanchaSeleccionadaNombre = turno.Cancha.Name,
@@ -289,7 +281,7 @@ namespace MVC.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Editar(TurnoEditDTO viewModel)
+        public async Task<IActionResult> Editar(TurnoEditViewModel viewModel)
         {
             var adminName = HttpContext.Session.GetString("AdminName");
             ViewBag.Admin = adminName;
@@ -336,6 +328,32 @@ namespace MVC.Controllers
             }
 
 
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            try
+            {
+                string response = await _turnoService.DeleteTurnosAsync(id);
+
+                if (response == "Turno eliminado con exito")
+                {
+                    TempData["SuccessMessage"] = response;
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Error al intentar eliminar el turno.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Ocurrió un error: {ex.Message}";
+            }
+
+            return RedirectToAction("Listado"); // Redirige a la vista de la lista después de la eliminación
         }
 
 

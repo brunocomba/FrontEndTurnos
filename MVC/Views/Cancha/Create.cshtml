@@ -1,0 +1,61 @@
+﻿@model MVC.Models.DTOs.Canchas.AltaCanchaViewModel
+
+@{
+    ViewData["Title"] = "Crear Cancha";
+}
+
+<h2 class="mb-4">Crear Cancha</h2>
+
+@if (TempData["msj"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["msj"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<form asp-controller="Cancha" asp-action="Create" method="post">
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Nombre" class="control-label font-weight-bold"></label>
+            <input asp-for="Nombre" class="form-control" type="text" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="deporteSeleccionado" class="control-label font-weight-bold">Deporte</label>
+            <select asp-for="deporteSeleccionado" asp-items="Model.ListaDeportes" class="form-control custom-select"></select> <!-- custom-select agrega la flecha -->
+            <span asp-validation-for="deporteSeleccionado" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Precio" class="control-label font-weight-bold"></label>
+            <input asp-for="Precio" class="form-control" type="number" />
+            <span asp-validation-for="Precio" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="form-row mt-4">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+        </div>
+        <div class="col-md-6">
+            <a asp-controller="Cancha" asp-action="Listado" class="btn btn-secondary btn-block">Ver canchas</a>
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

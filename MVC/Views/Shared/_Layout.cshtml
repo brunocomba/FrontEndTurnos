@@ -71,7 +71,20 @@
     <!-- Barra lateral -->
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <a asp-area="" asp-controller="Inicio" asp-action="Index">Home</a>
+
+
+        <!-- Dropdown para Turnos -->
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="clientesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Turnos
+            </a>
+            <div class="dropdown-menu" aria-labelledby="clientesDropdown">
+                <a class="dropdown-item" asp-area="" asp-controller="Turno" asp-action="Listado">Historial de Turnos</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Turno" asp-action="Create">Crear Turno</a>
+            </div>
+        </div>
+
 
         <!-- Dropdown para Clientes -->
         <div class="dropdown">
@@ -85,20 +98,39 @@
             </div>
         </div>
 
-        <!-- Dropdown para Turnos -->
+
+        <!-- Dropdown para Canchas -->
         <div class="dropdown">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="clientesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Turnos
+                Canchas
             </a>
             <div class="dropdown-menu" aria-labelledby="clientesDropdown">
-                <a class="dropdown-item" asp-area="" asp-controller="Turno" asp-action="Listado">Historial de Turnos</a>
-                <a class="dropdown-item" asp-area="" asp-controller="Turno" asp-action="Create">Crear Turno</a>
-                <!-- Agrega más opciones si es necesario -->
+                <a class="dropdown-item" asp-area="" asp-controller="Cancha" asp-action="Listado">Listado de Canchas</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Cancha" asp-action="Create">Registrar Nueva</a>
             </div>
         </div>
 
-        <a asp-area="" asp-controller="Administrador" asp-action="Listado">Administradores</a>
-        <!-- Agrega más enlaces aquí -->
+        <!-- Dropdown para DEportes -->
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="clientesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Deportes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="clientesDropdown">
+                <a class="dropdown-item" asp-area="" asp-controller="Deporte" asp-action="Listado">Listado Deportes</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Deporte" asp-action="Create">Registrar Nuevo</a>
+            </div>
+        </div>
+
+        <!-- Dropdown para cuenta Admi -->
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="clientesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cuenta
+            </a>
+            <div class="dropdown-menu" aria-labelledby="clientesDropdown">
+                <a class="dropdown-item" asp-area="" asp-controller="Administrador" asp-action="UpdateDatosPersonales">Actualizar Datos</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Administrador" asp-action="UpdatePass">Actualizar Password</a>
+            </div>
+        </div>
     </div>
 
     <!-- Contenido principal -->
@@ -106,24 +138,42 @@
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container-fluid">
+
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                       
                         <ul class="navbar-nav flex-grow-0">
                             <li class="nav-item dropdown">
+
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     @ViewBag.Admin <!-- Muestra el nombre del administrador -->
                                 </a>
+
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <!-- Link a Modificar Datos Personales -->
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("UpdateDatosPersonales", "Administrador", new { id = ViewBag.AdminId })">
+                                            Modificar Datos Personales
+                                        </a>
+                                    </li>
+
+                                    <!-- Link a Modificar Contraseña -->
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("UpdatePass", "Administrador", new { id = ViewBag.AdminId })">
+                                            Modificar Contraseña
+                                        </a>
+                                    </li>
+
                                     <li>
                                         <!-- Formulario para cerrar sesión (petición POST) -->
                                         <form action="@Url.Action("Logout", "Account")" method="post">
                                             <button type="submit" class="dropdown-item">Cerrar Sesión</button>
                                         </form>
                                     </li>
-                                </ul>
+
                             </li>
                         </ul>
                     </div>

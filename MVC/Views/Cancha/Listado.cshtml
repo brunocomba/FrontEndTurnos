@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MVC.Models.DTOs.Canchas.ListaCanchaViewModel>
+@{
+    ViewData["Title"] = "Canchas registradas";
+}
+
+<h1>Canchas</h1>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre cancha</th>
+            <th>Deporte</th>
+            <th>Cant Jugadores</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var cancha in Model)
+            {
+                <tr>
+                    <td>@cancha.Name</td>
+                    <td>@cancha.Deporte</td>
+                    <td>@cancha.cantJugadores</td>
+                    <td>@cancha.Precio</td>
+
+                    <td>
+                    <form asp-action="Eliminar" asp-controller="Cancha" asp-route-id="@cancha.Id" method="post"
+                          onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta cancha del registro?');" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No hay turnos registrados.</td>
+            </tr>
+        }
+    </tbody>
+</table>

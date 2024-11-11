@@ -32,7 +32,6 @@
                     <td>$@turno.Precio.ToString("N2")</td> <!-- Formatea el precio con dos decimales -->
                     <td>
                         <a asp-controller="Turno"  asp-action="Editar" asp-route-id="@turno.Id" class="btn btn-sm btn-warning">Editar</a>
-                        <a asp-action="Delete" asp-route-id="@turno.Id" class="btn btn-sm btn-danger">Eliminar</a>
                     </td>
                 </tr>
             }
@@ -40,7 +39,7 @@
         else
         {
             <tr>
-                <td colspan="7" class="text-center">No hay turnos para mostrar.</td>
+                <td colspan="7" class="text-center">No hay turnos registrador para hoy.</td>
             </tr>
         }
     </tbody>

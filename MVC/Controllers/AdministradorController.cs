@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC.ApiService;
-using MVC.Controllers.Generic;
-using MVC.Models;
-using Newtonsoft.Json;
+using MVC.Models.DTOs.Adminitradores;
 using System.Text;
 
 
@@ -19,171 +17,178 @@ namespace MVC.Controllers
             _administradorService = administradorService;
         }
 
-       
-        
 
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-        //public async Task<IActionResult> Index(int dni)
-        //{
-        //    if (dni != 0)
-        //    {
-        //        var resp = await _httpClient.GetAsync($"administradores/buscar/porDni{dni}");
+        [HttpPost]
+        public async Task<IActionResult> Create(AltaAdmiRequest altaReq)
+        {
+            var adminName = HttpContext.Session.GetString("AdminName");
+            ViewBag.Admin = adminName;
 
-        //        if (resp.IsSuccessStatusCode)
-        //        {
-        //            var content = await resp.Content.ReadAsStringAsync();
-        //            var administrador = JsonConvert.DeserializeObject<Administrador>(content);
+            string response = await _administradorService.AddAdmi(altaReq);
 
+            // Almacenar mensaje en TempData
+            TempData["msj"] = response;
 
-
-        //            return View("Index", new List<Administrador>([administrador]));
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        var response = await _httpClient.GetAsync("administradores/listado");
-
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var content = await response.Content.ReadAsStringAsync();
-        //            var administradores = JsonConvert.DeserializeObject<IEnumerable<Administrador>>(content);
-
-
-        //            return View("Index", administradores);
-        //        }
-
-        //    }
-
-        //    return View(new List<Administrador>());
-        //}
+            return View(); // cargar los combos otra vez
+        }
 
 
 
-        //[HttpGet]
-        //public async Task<IActionResult> Editar(int idAdmiMod)
-        //{
-        //    Administrador administrador;
 
-        //    try
-        //    {
+        // Método para cargar los datos del formulario en caso de fallo
+        private async Task DatosFormularioUpdateDatosPer(int idAdmiMod, GetAdmByIdResponse viewModel)
+        {
+            var adminName = HttpContext.Session.GetString("AdminName");
+            ViewBag.Admin = adminName;
 
+            var adm = await _administradorService.GetById(idAdmiMod);
 
-        //        // Hace la solicitud GET a la API
-        //        var response = await _httpClient.GetAsync($"administradores/buscar{idAdmiMod}");
+            viewModel.Nombre = adm.Nombre;
+            viewModel.Apellido = adm.Apellido;
+            viewModel.Dni = adm.Dni;
+            viewModel.fechaNacimiento = adm.fechaNacimiento;
+            viewModel.Calle = adm.Calle;
+            viewModel.Altura = adm.Altura;
 
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            // Si la solicitud es exitosa, deserializa el contenido a un objeto Administrador
-        //            var jsonResponse = await response.Content.ReadAsStringAsync();
-        //            administrador = JsonConvert.DeserializeObject<Administrador>(jsonResponse);
-        //        }
-        //        else
-        //        {
-        //            // Manejo de errores si la solicitud no es exitosa
-        //            return BadRequest("Error al obtener el administrador desde la API.");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Manejo de excepciones
-        //        return BadRequest(ex.Message);
-        //    }
-
-        //    // Retorna la vista de modificación con el modelo del administrador
-        //    return View(administrador);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> Update(Administrador adm)
-        //{
-
-        //    var jsonData = JsonConvert.SerializeObject(adm);
-
-        //    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-        //    var response = await _httpClient.PutAsync($"administradores/update/datosPersonales{adm.Id}", content);
-
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        // Manejar la respuesta exitosa
-        //        var result = await response.Content.ReadAsStringAsync();
-        //        return Content($"Éxito: {result}");
-
-        //        //return RedirectToAction("Index");   // volver al index
-        //    }
-        //    else
-        //    {
-        //        var resultNeg = await response.Content.ReadAsStringAsync();
-        //        return Content($"Error: {resultNeg}");
+        }
 
 
-        //    }
+        [HttpGet]
+        public async Task<IActionResult> UpdateDatosPersonales(int id)
+        {
 
-            //ModelState.AddModelError(string.Empty, "Error al crear un nuevo administrador.");
+            var adminName = HttpContext.Session.GetString("AdminName");
+            ViewBag.Admin = adminName;
 
-            //if (ModelState.IsValid)
-            //{
-            //    try
-            //    {
+            var adm = await _administradorService.GetById(id); // Obtiene el turno por ID
+            if (adm == null)
+            {
+                NotFound();
+            }
 
+            var viewModel = new GetAdmByIdResponse
+            {
+                Id = adm.Id,
+                Nombre = adm.Nombre,
+                Apellido = adm.Apellido,
+                Dni = adm.Dni,
+                fechaNacimiento = adm.fechaNacimiento.Date,
+                Calle = adm.Calle,
+                Altura = adm.Altura,
+            };
 
-            //        // Crear el contenido para el cuerpo de la solicitud usando directamente el objeto administrador
-            //        var content = new StringContent(JsonConvert.SerializeObject(administrador), Encoding.UTF8, "application/json");
-
-            //        // Hace la solicitud PUT a la API
-            //        var response = await _httpClient.PostAsync("https://localhost:7147/administradores/update/datosPersonales", content);
-
-            //        if (response.IsSuccessStatusCode)
-            //        {
-            //            return RedirectToAction("Index");
-            //        }
-            //        else
-            //        {
-            //            ModelState.AddModelError(string.Empty, "Error al actualizar los datos del administrador.");
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        ModelState.AddModelError(string.Empty, $"Error: {ex.Message}");
-            //    }
-            //}
-
-            //return View(administrador);
-        //}
+            return View(viewModel);
+        }
 
 
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create(Administrador adm)
-        //{
-        //    var jsonData = JsonConvert.SerializeObject(adm);
+        [HttpPost]
+        public async Task<IActionResult> UpdateDatosPersonales(GetAdmByIdResponse viewModel)
+        {
+            var adminName = HttpContext.Session.GetString("AdminName");
+            ViewBag.Admin = adminName;
 
-        //    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            try
+            {
+                // Crear el DTO directamente
+                UpdateDatosPerRequest req = new UpdateDatosPerRequest
+                {
+                    idAdmiMod = viewModel.Id,
+                    Nombre = viewModel.Nombre,
+                    Apellido = viewModel.Apellido,
+                    Dni = viewModel.Dni,
+                    fechaNacimiento = viewModel.fechaNacimiento,
+                    Calle = viewModel.Calle,
+                    Altura = viewModel.Altura                
+                };
 
-        //    var response = await _httpClient.PostAsync("https://localhost:7147/administradores/add", content);
+                string response = await _administradorService.UpdateDatosPersonales(req);
 
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        // Manejar la respuesta exitosa
-        //        var result = await response.Content.ReadAsStringAsync();
-        //        return Content($"Éxito: {result}");
+                if (response == "Administrador actualizado con éxito")
+                {
+                    // Almacenar mensaje de éxito en TempData
+                    ViewBag.SuccessMessage = response;
+                    return View(viewModel); // Redirigir tras éxito
+                }
+                else
+                {
+                    // Mensaje de error
+                    ViewBag.ErrorMessage = response;
 
-        //        //return RedirectToAction("Index");   // volver al index
-        //    }
-        //    else
-        //    {
-        //        var resultNeg = await response.Content.ReadAsStringAsync();
-        //        return Content($"Error: {resultNeg}");
+                    // Recargar los datos del turno en caso de error
+                    await DatosFormularioUpdateDatosPer(viewModel.Id, viewModel);
 
-        //        //ModelState.AddModelError(string.Empty, "Error al crear un nuevo administrador.");
-        //    }
+                }
+                // Volver a la vista con los datos
+                return View("UpdateDatosPersonales", viewModel);
+            }
+            catch (Exception ex)
+            {
+                // Enviar mensaje de error por excepción
+                ViewBag.Error = ex.Message;
+                return View("UpdateDatosPersonales", viewModel); // Devuelve el formulario con el mensaje de error
 
-        //}
+            }
+        }
+
+
+
+
+
+        [HttpGet]
+        public IActionResult UpdatePass()
+        {
+            var adminName = HttpContext.Session.GetString("AdminName");
+            ViewBag.Admin = adminName;
+
+            var adminId = HttpContext.Session.GetInt32("AdminId");
+            ViewBag.AdminId = adminId;
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePass(UpdatePassRequest req)
+        {
+            var adminName = HttpContext.Session.GetString("AdminName");
+            ViewBag.Admin = adminName;
+         
+
+
+            try
+            {
+              
+                string response = await _administradorService.UpdatePassword(req);
+
+                if (response == "Administrador actualizado con éxito")
+                {
+                    // Almacenar mensaje de éxito en TempData
+                    ViewBag.SuccessMessage = response;
+                    return View(req); // Redirigir tras éxito
+                }
+                else
+                {
+                    // Mensaje de error
+                    ViewBag.ErrorMessage = response;
+
+                }
+                // Volver a la vista con los datos
+                return View("UpdatePass", req);
+            }
+            catch (Exception ex)
+            {
+                // Enviar mensaje de error por excepción
+                ViewBag.Error = ex.Message;
+                return View("UpdatePass", req); // Devuelve el formulario con el mensaje de error
+
+            }
+        }
 
     }
 }

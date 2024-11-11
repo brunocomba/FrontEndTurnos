@@ -16,6 +16,8 @@
             <th>Telefono Cliente</th>
             <th>Cancha</th>
             <th>Precio</th>
+            <th>Acciones</th>
+
 
         </tr>
     </thead>
@@ -31,13 +33,19 @@
                     <td>@turno.TelefonoCliente</td>
                     <td>@turno.Cancha</td>
                     <td>$@turno.Precio.ToString()</td> <!-- Formatea como moneda -->
+
+                    <td>
+                    <form asp-action="Eliminar" asp-controller="Turno" asp-route-id="@turno.Id" method="post"
+                          onsubmit="return confirm('¿Estás seguro de que deseas eliminar este turno del historial?');" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
                 </tr>
             }
         }
         else
         {
             <tr>
-                <td colspan="6" class="text-center">No hay turnos para mostrar.</td>
+                <td colspan="6" class="text-center">No hay turnos registrados.</td>
             </tr>
         }
     </tbody>

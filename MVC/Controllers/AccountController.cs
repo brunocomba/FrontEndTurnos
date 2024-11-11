@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Text;
 using Microsoft.DotNet.MSIdentity.Shared;
 using NuGet.Protocol.Plugins;
+using System.Runtime.Intrinsics.Arm;
 
 namespace MVC.Controllers
 {
@@ -42,12 +43,15 @@ namespace MVC.Controllers
             {
                 return View();
             }
-            var loginData = new { email, password };
 
+            // Datos para el inicio de sesión
+            var loginData = new { email, password };
             var content = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
 
+            // Llama a la API para el inicio de sesión
             var response = await _httpClient.PostAsync("administradores/login", content);
 
+            // Verifica la respuesta
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
@@ -55,13 +59,14 @@ namespace MVC.Controllers
 
                 // Almacena el token en la sesión
                 HttpContext.Session.SetString("AuthToken", tokenResponse.Token);
-
                 HttpContext.Session.SetString("AdminName", tokenResponse.Admin);
+                HttpContext.Session.SetInt32("AdminId", tokenResponse.AdminId);
 
 
+                // Redirige al usuario a la página principal después de iniciar sesión
                 return RedirectToAction("Index", "Home");
             }
-            
+
             var errorMessage = await response.Content.ReadAsStringAsync();
             ViewBag.Error = errorMessage;
             return View("Index", "Account");

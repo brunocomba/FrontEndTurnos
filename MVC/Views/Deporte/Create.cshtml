@@ -1,0 +1,51 @@
+﻿@model MVC.Models.DTOs.Deportes.AltaDeporteDTO
+
+@{
+    ViewData["Title"] = "Nuevo deporte";
+}
+
+<h2 class="mb-4">Registrar nuevo cliente</h2>
+
+@if (TempData["msj"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["msj"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<form asp-controller="Deporte" asp-action="Create" method="post">
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Name" class="control-label font-weight-bold"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="cantJugadores" class="control-label font-weight-bold"></label>
+            <input asp-for="cantJugadores" class="form-control" />
+            <span asp-validation-for="cantJugadores" class="text-danger"></span>
+        </div>
+    </div>
+
+    
+    <div class="form-row mt-4">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+        </div>
+        <div class="col-md-6">
+            <a asp-controller="Deporte" asp-action="Listado" class="btn btn-secondary btn-block">Ver listado</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

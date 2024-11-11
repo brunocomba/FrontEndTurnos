@@ -1,0 +1,65 @@
+﻿@model MVC.Models.DTOs.Adminitradores.UpdatePassRequest
+
+@{
+    ViewData["Title"] = "Actualizar contraseña administrador";
+}
+
+
+<h2 class="mb-4">Actualizar contraseña administrador @ViewBag.Admin</h2>
+
+@if (TempData["msj"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["msj"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<form asp-controller="Administrador"  asp-action="UpdatePass" method="post">
+
+    <input type="hidden" name="idAdmiMod" value="@ViewBag.AdminId" />
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="passAntigua" class="control-label font-weight-bold"></label>
+            <input asp-for="passAntigua" class="form-control"/>
+            <span asp-validation-for="passAntigua" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="passNew" class="control-label font-weight-bold"></label>
+            <input asp-for="passNew" class="form-control" />
+            <span asp-validation-for="passNew" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <label asp-for="confirPassNew" class="control-label font-weight-bold"></label>
+            <input asp-for="confirPassNew" class="form-control" />
+            <span asp-validation-for="confirPassNew" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="form-row mt-4">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block">Guardar cambios</button>
+        </div>
+        <div class="col-md-6">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-block">Home</a>
+        </div>
+    </div>
+
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

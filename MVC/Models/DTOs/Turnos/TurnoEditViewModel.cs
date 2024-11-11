@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVC.Models.DTOs
 {
-    public class TurnoEditDTO
+    public class TurnoEditViewModel
     {
         public int idTurnoMod { get; set; }
         // Para las selecciones

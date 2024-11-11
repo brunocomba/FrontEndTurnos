@@ -1,6 +1,6 @@
 ﻿namespace MVC.Models.DTOs
 {
-    public class TurnoDTO
+    public class AltaTurnoDTO
     {
         public int idCliente { get; set; }
         public int idCancha { get; set; }

@@ -6,7 +6,22 @@
 <h1>Clientes registrados</h1>
 
 
-<form asp-action="Listado" method="get">
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+<form asp-controller="Cliente" asp-action="Listado" method="get">
     <div class="form-group">
         <input type="text" id="dniCliente" name="dniCliente" class="form-control" placeholder="Ingrese DNI del cliente" />
     </div>
@@ -24,24 +39,43 @@
             <th>Calle</th>
             <th>Altura</th>
             <th>Telefono</th>
+            <th>Acciones</th>
 
 
         </tr>
     </thead>
     <tbody>
-        @foreach (var client in Model)
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var client in Model)
+            {
+                <tr>
+                    <td>@client.Nombre</td>
+                    <td>@client.Apellido</td>
+                    <td>@client.Dni</td>
+                    <td>@client.fechaNacimiento</td>
+                    <td>@client.Calle</td>
+                    <td>@client.Altura</td>
+                    <td>@client.Telefono</td>
+                    <td>
+                        <a asp-controller="Cliente" asp-action="Editar" asp-route-id="@client.Id" class="btn btn-sm btn-warning">Editar</a>
+                        <form asp-action="Eliminar" asp-controller="Cliente" asp-route-id="@client.Id" method="post"
+                              onsubmit="return confirm('¿Estás seguro de que deseas eliminar este cliente?');" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        </form>
+
+                </tr>
+            }
+
+        }
+        else
         {
             <tr>
-                <td>@client.Nombre</td>
-                <td>@client.Apellido</td>
-                <td>@client.Dni</td>
-                <td>@client.fechaNacimiento.ToString("dd/MM/yyyy")</td>
-                <td>@client.Calle</td>
-                <td>@client.Altura</td>
-                <td>@client.Telefono</td>
-
-
+                <td colspan="6" class="text-center">No hay clientes registrados.</td>
             </tr>
         }
     </tbody>
+
 </table>
+
+

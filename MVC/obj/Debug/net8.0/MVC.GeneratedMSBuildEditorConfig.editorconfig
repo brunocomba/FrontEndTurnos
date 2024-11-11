@@ -34,28 +34,48 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Administrador/Editar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxFZGl0YXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Administrador/Listado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxMaXN0YWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Administrador/UpdateDatosPersonales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxVcGRhdGVEYXRvc1BlcnNvbmFsZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Administrador/UpdatePass.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxVcGRhdGVQYXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Cancha/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuY2hhXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Cancha/Listado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuY2hhXExpc3RhZG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Cliente/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Cliente/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxFZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Cliente/Listado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxMaXN0YWRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Deporte/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwb3J0ZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Deporte/Listado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwb3J0ZVxMaXN0YWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/brcom/OneDrive/Documentos/GitHub/FrontEndTurnos/MVC/Views/Shared/Error.cshtml]

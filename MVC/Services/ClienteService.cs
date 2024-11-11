@@ -1,5 +1,4 @@
 ﻿using MVC.Models;
-using MVC.Models.DTOs;
 using MVC.Models.DTOs.Clientes;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -111,11 +110,12 @@ namespace MVC.Services
             {
                 // Si la solicitud es exitosa, deserializa el contenido a un objeto Administrador
                 var jsonResponse = await response.Content.ReadAsStringAsync();
+
                 var cliente = JsonConvert.DeserializeObject<Cliente>(jsonResponse);
                 return cliente;
             }
 
-            return null;
+            return null; 
 
         }
 
@@ -138,12 +138,38 @@ namespace MVC.Services
                 var content = await response.Content.ReadAsStringAsync();
 
                 // Deserializar la respuesta JSON a una lista de Administradores
-                var adms = JsonConvert.DeserializeObject<IEnumerable<Cliente>>(content);
+                var clientes = JsonConvert.DeserializeObject<IEnumerable<Cliente>>(content);
 
-                return adms;
+                return clientes;
             }
 
             return [];
+        }
+
+        public async Task<string> DeleteClienteAsync(int id)
+        {
+            // Obtiene el token de autenticación desde la sesión
+            var token = _httpContextAccessor.HttpContext.Session.GetString("AuthToken");
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+
+            // Construye la URL para la solicitud DELETE
+            var requestUrl = $"clientes/delete{id}";
+
+            // Realiza la solicitud DELETE
+            var response = await _httpClient.DeleteAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var ok = await response.Content.ReadAsStringAsync();
+                return ok;
+            }
+
+            var msj = await response.Content.ReadAsStringAsync();
+            return msj;
         }
     }
 }

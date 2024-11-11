@@ -21,7 +21,10 @@ namespace MVC.Controllers
         {
 
             var adminName = HttpContext.Session.GetString("AdminName");
-            ViewBag.Admin = adminName; 
+            var id = HttpContext.Session.GetInt32("AdminId");
+
+            ViewBag.Admin = adminName;
+            ViewBag.AdminId = id;
 
             var fechaActual = DateTime.Now.Date; // Obtiene la fecha actual
             var turnos =  await _turnoService.TurnosDelDia(fechaActual); // Llama a tu servicio

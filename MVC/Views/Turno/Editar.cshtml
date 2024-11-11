@@ -1,4 +1,4 @@
-﻿@model MVC.Models.DTOs.TurnoEditDTO
+﻿@model MVC.Models.DTOs.TurnoEditViewModel
 
 @{
     ViewData["Title"] = "Editar Turno";
@@ -61,7 +61,7 @@
         <h4>Formulario de Edición</h4>
         <form asp-controller="Turno" asp-action="Editar" method="post">
 
-            <input type="hidden" asp-for="idTurnoMod" />
+            <input type="hidden" asp-for="idTurnoMod"/>
 
             <div class="form-row mb-3">
 

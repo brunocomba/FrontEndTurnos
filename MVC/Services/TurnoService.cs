@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+﻿
 using MVC.Models;
 using MVC.Models.DTOs;
 using Newtonsoft.Json;
@@ -22,7 +20,7 @@ namespace MVC.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<string> AddTurno(TurnoDTO turno)
+        public async Task<string> AddTurno(AltaTurnoDTO turno)
         {
             var token = _httpContextAccessor.HttpContext.Session.GetString("AuthToken"); // O HttpContextAccessor en ASP.NET Core
 
@@ -141,6 +139,36 @@ namespace MVC.Services
             return null;
 
         }
+
+
+        public async Task<string> DeleteTurnosAsync(int id)
+        {
+            // Obtiene el token de autenticación desde la sesión
+            var token = _httpContextAccessor.HttpContext.Session.GetString("AuthToken");
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+
+            // Construye la URL para la solicitud DELETE
+            var requestUrl = $"turnos/delete{id}";
+
+            // Realiza la solicitud DELETE
+            var response = await _httpClient.DeleteAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var ok = await response.Content.ReadAsStringAsync();
+                return ok;
+            }
+
+            var msj = await response.Content.ReadAsStringAsync();
+            return msj;
+        }
+
+
+
     }
     
 

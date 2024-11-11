@@ -16,6 +16,9 @@ builder.Services.AddScoped<AccountService>();
 builder.Services.AddTransient<ClienteService>();
 builder.Services.AddTransient<CanchaService>(); 
 builder.Services.AddTransient<TurnoService>();
+builder.Services.AddTransient<CanchaService>();
+builder.Services.AddTransient<DeporteService>();
+
 
 builder.Services.AddHttpContextAccessor(); // Agrega esta línea
 

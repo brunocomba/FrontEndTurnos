@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MVC.Models.DTOs.Deportes.ListaDeporteViewModel>
+@{
+    ViewData["Title"] = "Deportes";
+}
+
+<h1>Deportes</h1>
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+@* <form asp-controller="Cliente" asp-action="Listado" method="get">
+    <div class="form-group">
+        <input type="text" id="dniCliente" name="dniCliente" class="form-control" placeholder="Ingrese DNI del cliente" />
+    </div>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form> *@
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Deporte</th>
+            <th>Cantidad de jugadores</th>
+            <th>Acciones</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var dep in Model)
+            {
+                <tr>
+                    <td>@dep.Nombre</td>
+                    <td>@dep.cantJugadores</td>
+                    <td>
+                        <a asp-controller="Deporte" asp-action="Editar" asp-route-id="@dep.Id" class="btn btn-sm btn-warning">Editar</a>
+                        <form asp-action="Eliminar" asp-controller="Deporte" asp-route-id="@dep.Id" method="post"
+                              onsubmit="return confirm('¿Estás seguro de que deseas eliminar este deporte?');" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        </form>
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No hay clientes registrados.</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
